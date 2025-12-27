@@ -1,0 +1,101 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dip-learn"
+version = "0.0.1b1"
+description = "Digital Image Processing Library - Computer Vision utilities for image processing, annotation, and augmentation"
+authors = [{ name="vanTHkrab", email="you@email.com" }]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+keywords = ["image-processing", "computer-vision", "opencv", "annotation", "augmentation", "data-augmentation"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
+
+dependencies = [
+    "numpy>=2.2.6",
+    "opencv-python>=4.5.0",
+]
+
+[project.optional-dependencies]
+scikit = [
+    "scikit-image>=0.26.0",
+]
+dev = [
+    "pytest>=9.0.0",
+    "pytest-cov>=6.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.0.0",
+    "flake8>=6.0.0",
+]
+all = [
+    "dip-learn[scikit,dev]",
+]
+
+[project.urls]
+Homepage = "https://github.com/vanTHkrab/dip-learn"
+Repository = "https://github.com/vanTHkrab/dip-learn"
+Documentation = "https://github.com/vanTHkrab/dip-learn#readme"
+Issues = "https://github.com/vanTHkrab/dip-learn/issues"
+
+[project.scripts]
+dip-learn = "dip.cli.main:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dip*"]
+
+[tool.setuptools.package-dir]
+dip = "dip"
+
+[tool.pytest.ini_options]
+testpaths = ["dip/tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --tb=short"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py39", "py310", "py311", "py312", "py313"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.coverage.run]
+source = ["dip"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
