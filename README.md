@@ -6,11 +6,14 @@ A comprehensive digital image processing library built with OpenCV, NumPy, and s
 
 ## 📦 Installation
 
-### Install via pip (from PyPI)
+[//]: # (### Install via pip &#40;from PyPI&#41;)
 
-```bash
-pip install dip-learn
-```
+[//]: # ()
+[//]: # (```bash)
+
+[//]: # (pip install dip-learn)
+
+[//]: # (```)
 
 ### Install from GitHub
 
