@@ -68,14 +68,14 @@ pip install scikit-image  # Advanced thresholding, morphology, denoising
 ## 🚀 Quick Start
 
 ```python
-from images_process import ImageOps, ImagePipeline, PresetPipelines
+from dip import ImageOps, ImagePipeline, PresetPipelines
 
 # Load image
-from images_process import load_image
+from dip import load_image
 img = load_image('path/to/image.png')
 
 # Quick operations
-from images_process import to_grayscale, gaussian_blur, otsu_threshold
+from dip import to_grayscale, gaussian_blur, otsu_threshold
 gray = to_grayscale(img)
 blurred = gaussian_blur(gray, ksize=5)
 binary = otsu_threshold(blurred)
@@ -100,7 +100,7 @@ result = PresetPipelines.seven_segment().run(img)
 ## 📁 Project Structure
 
 ```
-images_process/
+dip/
 ├── __init__.py          # Main exports
 ├── core/                # Core components
 │   ├── operations.py    # ImageOps static class
@@ -136,7 +136,7 @@ images_process/
 Static class with all image operations as methods.
 
 ```python
-from images_process import ImageOps
+from dip import ImageOps
 
 # All operations available as static methods
 gray = ImageOps.to_grayscale(img)
@@ -149,7 +149,7 @@ enhanced = ImageOps.clahe(gray, clip_limit=2.0)
 Chainable pipeline for step-by-step processing.
 
 ```python
-from images_process import ImagePipeline, to_grayscale, gaussian_blur
+from dip import ImagePipeline, to_grayscale, gaussian_blur
 
 pipeline = ImagePipeline()
 pipeline.add_step('grayscale', to_grayscale)
@@ -170,7 +170,7 @@ for name, intermediate in result.history.items():
 
 #### Color Transforms
 ```python
-from images_process import (
+from dip import (
     to_grayscale,    # Convert to grayscale
     to_bgr,          # Convert to BGR
     to_rgb,          # Convert to RGB
@@ -183,7 +183,7 @@ from images_process import (
 
 #### Threshold
 ```python
-from images_process import (
+from dip import (
     binary_threshold,           # Simple threshold
     otsu_threshold,             # Otsu's automatic threshold
     adaptive_threshold_mean,    # Adaptive mean threshold
@@ -195,7 +195,7 @@ from images_process import (
 
 #### Morphology
 ```python
-from images_process import (
+from dip import (
     erode,           # Erosion
     dilate,          # Dilation
     morph_open,      # Opening (erosion -> dilation)
@@ -209,7 +209,7 @@ from images_process import (
 
 #### Geometric
 ```python
-from images_process import (
+from dip import (
     resize,              # Resize with width/height/scale
     rotate,              # Rotate by angle
     rotate_bound,        # Rotate without cropping
@@ -225,7 +225,7 @@ from images_process import (
 
 #### Histogram
 ```python
-from images_process import (
+from dip import (
     histogram_equalization,  # Global histogram equalization
     clahe,                   # CLAHE (adaptive)
     contrast_stretch,        # Contrast stretching
@@ -239,7 +239,7 @@ from images_process import (
 
 #### Smoothing
 ```python
-from images_process import (
+from dip import (
     gaussian_blur,     # Gaussian blur
     median_blur,       # Median blur
     bilateral_filter,  # Bilateral filter
@@ -251,7 +251,7 @@ from images_process import (
 
 #### Sharpening
 ```python
-from images_process import (
+from dip import (
     unsharp_mask,       # Unsharp masking
     laplacian_sharpen,  # Laplacian sharpening
     kernel_sharpen,     # Kernel-based sharpening
@@ -262,7 +262,7 @@ from images_process import (
 
 #### Edge Detection
 ```python
-from images_process import (
+from dip import (
     canny_edge,      # Canny edge detector
     sobel_edge,      # Sobel edge detector
     sobel_x,         # Sobel X gradient
@@ -281,7 +281,7 @@ Drawing and annotation utilities for visualizing results and labeling images.
 
 #### Basic Shapes
 ```python
-from images_process import (
+from dip import (
     draw_rectangle,      # Draw rectangle
     draw_circle,         # Draw circle
     draw_line,           # Draw line
@@ -301,7 +301,7 @@ result = draw_polygon(img, [(10, 10), (50, 10), (30, 50)], color=(0, 255, 255))
 
 #### Text Operations
 ```python
-from images_process import (
+from dip import (
     draw_text,                  # Draw text
     draw_text_with_background,  # Draw text with background
     get_text_size,              # Calculate text size
@@ -321,7 +321,7 @@ size, baseline = get_text_size("Sample Text", font_scale=1.0)
 
 #### Annotation Utilities
 ```python
-from images_process import (
+from dip import (
     draw_bounding_box,   # Draw bounding box with label
     draw_bounding_boxes, # Draw multiple bounding boxes
     draw_contours,       # Draw contours
@@ -351,7 +351,7 @@ result = draw_crosshair(img, center=(50, 50), size=20, color=(0, 255, 0))
 
 #### Overlay Operations
 ```python
-from images_process import (
+from dip import (
     overlay_image,       # Overlay one image on another
     add_alpha_channel,   # Add alpha channel to image
     create_mask_overlay, # Create colored mask overlay
@@ -368,7 +368,7 @@ result = create_mask_overlay(img, mask, color=(0, 255, 0), alpha=0.5)
 
 #### Brightness & Contrast
 ```python
-from images_process import (
+from dip import (
     adjust_brightness,        # Adjust brightness
     adjust_contrast,          # Adjust contrast
     gamma_correction,         # Gamma correction
@@ -381,7 +381,7 @@ from images_process import (
 
 #### Denoising
 ```python
-from images_process import (
+from dip import (
     non_local_means_denoising,  # NLM denoising
     remove_salt_pepper_noise,   # Salt & pepper removal
     denoise_morphological,      # Morphological denoising
@@ -539,7 +539,7 @@ augmented_dataset = create_augmented_dataset(
 Pre-built pipelines for common tasks:
 
 ```python
-from images_process import PresetPipelines
+from dip import PresetPipelines
 
 # OCR preprocessing
 ocr_result = PresetPipelines.ocr_basic().run(img)
@@ -576,7 +576,7 @@ cleaned = PresetPipelines.morphological_clean().run(img)
 
 #### I/O
 ```python
-from images_process import (
+from dip import (
     load_image,           # Load image from file
     save_image,           # Save image to file
     load_images_from_dir, # Load all images from directory
@@ -598,7 +598,7 @@ images = load_images_from_dir('images/', pattern='*.png')
 
 #### Visualization
 ```python
-from images_process import (
+from dip import (
     visualize_pipeline_result,  # Show pipeline results
     compare_images,             # Side-by-side comparison
     show_image,                 # Display single image
@@ -615,7 +615,7 @@ visualize_pipeline_result(result)
 
 #### Metrics
 ```python
-from images_process import (
+from dip import (
     variance_of_laplacian,  # Blur detection metric
     is_blurry,              # Check if image is blurry
     calculate_snr,          # Signal-to-noise ratio
@@ -640,7 +640,7 @@ print(f"Entropy: {stats['entropy']:.2f}")
 ## 🔧 Convenience Functions
 
 ```python
-from images_process import process_for_ocr, process_seven_segment, batch_process
+from dip import process_for_ocr, process_seven_segment, batch_process
 
 # Quick OCR preprocessing
 processed = process_for_ocr('image.png', preset='basic')
@@ -658,13 +658,13 @@ results = batch_process(images, pipeline='ocr_basic')
 
 ```bash
 # Process single image
-python -m images_process.cli process input.png -o output.png -p ocr_basic
+python -m dip.cli process input.png -o output.png -p ocr_basic
 
 # Get image info
-python -m images_process.cli info image.png
+python -m dip.cli info image.png
 
 # Compare two images
-python -m images_process.cli compare original.png processed.png
+python -m dip.cli compare original.png processed.png
 ```
 
 ## 📋 Available Presets
@@ -688,7 +688,7 @@ python -m images_process.cli compare original.png processed.png
 
 ### OCR Preprocessing
 ```python
-from images_process import load_image, PresetPipelines, save_image
+from dip import load_image, PresetPipelines, save_image
 
 img = load_image('bp_display.jpg')
 result = PresetPipelines.ocr_advanced().run(img)
@@ -697,7 +697,7 @@ save_image(result.output, 'preprocessed.png')
 
 ### Custom Pipeline
 ```python
-from images_process import (
+from dip import (
     ImagePipeline, to_grayscale, clahe, 
     gaussian_blur, otsu_threshold, morph_close
 )
@@ -714,7 +714,7 @@ result = pipeline.run(img)
 
 ### Batch Processing with Progress
 ```python
-from images_process import load_images_from_dir, PresetPipelines, save_image
+from dip import load_images_from_dir, PresetPipelines, save_image
 import os
 
 images = load_images_from_dir('input/')
@@ -732,7 +732,7 @@ When scikit-image is installed, additional advanced functions become available:
 
 ### Advanced Thresholding
 ```python
-from images_process import (
+from dip import (
     threshold_sauvola,    # Best for document/text images
     threshold_niblack,    # Local threshold for documents
     threshold_yen,        # Good for bimodal images
@@ -750,7 +750,7 @@ thresholds, regions = threshold_multiotsu(img, classes=3)
 
 ### Advanced Denoising
 ```python
-from images_process import (
+from dip import (
     denoise_tv_chambolle,  # Total Variation (edge-preserving)
     denoise_tv_bregman,    # Faster TV denoising
     denoise_wavelet,       # Wavelet-based denoising
@@ -767,7 +767,7 @@ denoised = denoise_wavelet(img, wavelet='db1', mode='soft')
 
 ### Advanced Morphology
 ```python
-from images_process import (
+from dip import (
     thin,                    # Thin to 1-pixel skeleton
     skeletonize_sk,          # Skeletonization
     medial_axis_transform,   # Medial axis + distance
@@ -787,7 +787,7 @@ skeleton = skeletonize_sk(binary, method='lee')
 
 ### Feature Detection
 ```python
-from images_process import (
+from dip import (
     detect_blob_dog,         # Blob detection (DoG)
     detect_blob_log,         # Blob detection (LoG)
     detect_corners_harris,   # Harris corners
@@ -803,7 +803,7 @@ corners = detect_corners_harris(gray, sigma=1.0)
 
 ### Image Restoration
 ```python
-from images_process import (
+from dip import (
     wiener_filter,          # Wiener deconvolution
     richardson_lucy_sk,     # Richardson-Lucy deblur
     inpaint_biharmonic,     # Image inpainting
@@ -819,7 +819,7 @@ restored = inpaint_biharmonic(img, damage_mask)
 
 ### Ridge/Vessel Enhancement
 ```python
-from images_process import (
+from dip import (
     frangi_filter,    # Frangi vesselness
     meijering_filter, # Meijering neuriteness
     sato_filter,      # Sato tubeness
@@ -831,7 +831,7 @@ vessels = frangi_filter(img, sigmas=(1, 2, 3))
 
 ### Hough Transform
 ```python
-from images_process import (
+from dip import (
     hough_line_transform,
     hough_line_peaks,
     hough_circle_transform,
@@ -849,13 +849,13 @@ hspaces = hough_circle_transform(edges, radii)
 
 ### Check Availability
 ```python
-from images_process import SKIMAGE_AVAILABLE
+from dip import SKIMAGE_AVAILABLE
 
 if SKIMAGE_AVAILABLE:
-    from images_process import threshold_sauvola
+    from dip import threshold_sauvola
     # Use advanced features
 else:
-    from images_process import adaptive_threshold_gaussian
+    from dip import adaptive_threshold_gaussian
     # Fallback to OpenCV
 ```
 
