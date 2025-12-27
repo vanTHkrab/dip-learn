@@ -1,15 +1,65 @@
-# Images Process Library
 
-A comprehensive image processing library built with OpenCV, NumPy, and scikit-image for BP Monitor OCR project.
+A comprehensive digital image processing library built with OpenCV, NumPy, and scikit-image for Python.
+
+**Version:** 0.0.1-beta  
+**Python:** 3.9 - 3.13
 
 ## 📦 Installation
 
-```bash
-# Install dependencies (required)
-pip install opencv-python numpy
+### Install via pip (from PyPI)
 
-# Install scikit-image for advanced features (optional but recommended)
-pip install scikit-image
+```bash
+pip install dip-learn
+```
+
+### Install from GitHub
+
+```bash
+# Install latest version from main branch
+pip install git+https://github.com/vanTHkrab/dip-learn.git
+
+# Install specific version/tag
+pip install git+https://github.com/vanTHkrab/dip-learn.git@v0.0.1b1
+
+# Install specific branch
+pip install git+https://github.com/vanTHkrab/dip-learn.git@main
+
+# Install with optional dependencies
+pip install "dip-learn[all] @ git+https://github.com/vanTHkrab/dip-learn.git"
+```
+
+### Install from source
+
+```bash
+# Clone the repository
+git clone https://github.com/vanTHkrab/dip-learn.git
+cd dip-learn
+
+# Create virtual environment (recommended)
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+# or
+.\venv\Scripts\activate   # Windows
+
+# Install in editable mode (for development)
+pip install -e .
+
+# Install with all optional dependencies
+pip install -e ".[all]"
+
+# Install with development dependencies
+pip install -e ".[dev]"
+```
+
+### Dependencies
+
+**Required:**
+- `numpy>=1.20.0`
+- `opencv-python>=4.5.0`
+
+**Optional (for advanced features):**
+```bash
+pip install scikit-image  # Advanced thresholding, morphology, denoising
 ```
 
 ## 🚀 Quick Start
