@@ -62,6 +62,7 @@ pip install -e ".[dev]"
 
 **Optional (for advanced features):**
 ```bash
+pip install matplotlib    # Visualization and plotting
 pip install scikit-image  # Advanced thresholding, morphology, denoising
 ```
 
@@ -72,7 +73,11 @@ from dip import ImageOps, ImagePipeline, PresetPipelines
 
 # Load image
 from dip import load_image
-img = load_image('path/to/image.png')
+
+from pathlib import Path
+from matplotlib import pyplot as plt
+
+img = load_image(Path("../data/output/dia/allwell_dia_0004.png"))
 
 # Quick operations
 from dip import to_grayscale, gaussian_blur, otsu_threshold
@@ -88,13 +93,26 @@ result = ImageOps.clahe(result, clip_limit=2.0)
 pipeline = ImagePipeline()
 pipeline.add_step('grayscale', to_grayscale)
 pipeline.add_step('blur', gaussian_blur, ksize=5)
-pipeline.add_step('threshold', otsu_threshold)
+pipeline.add_step('otsu_threshold', otsu_threshold)
 result = pipeline.run(img)
 print(f"Output: {result.output.shape}")
 
 # Using Presets (recommended)
 result = PresetPipelines.ocr_basic().run(img)
 result = PresetPipelines.seven_segment().run(img)
+
+# Show results
+fig, axes = plt.subplots(1, 3, figsize=(12, 4))
+axes[0].imshow(img)
+axes[0].set_title("Original")
+axes[1].imshow(gray, cmap='gray')
+axes[1].set_title("Grayscale")
+axes[2].imshow(binary, cmap='gray')
+axes[2].set_title("Binary (Otsu)")
+for ax in axes:
+    ax.axis('off')
+plt.tight_layout()
+plt.show()
 ```
 
 ## 📁 Project Structure
@@ -937,60 +955,6 @@ class TestMyFeature:
         result = draw_rectangle(sample_image, (10, 10), (50, 50),
                                 color=(255, 0, 0), thickness=-1)
         assert result[:, :, 0].max() == 255
-```
-
-## 📦 Building as Package
-
-### Development Installation
-
-```bash
-# Clone repository
-git clone https://github.com/vanTHkrab/dip-learn.git
-cd dip
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# or
-.\venv\Scripts\activate   # Windows
-
-# Install in editable mode with dev dependencies
-pip install -e ".[dev]"
-```
-
-### Building the Package
-
-```bash
-# Install build tools
-pip install build twine
-
-# Build the package
-python -m build
-
-# This creates:
-# dist/
-#   ├── dip-0.1.0-py3-none-any.whl
-#   └── dip-0.1.0.tar.gz
-```
-
-### Publishing to PyPI
-
-```bash
-# Upload to TestPyPI (for testing)
-python -m twine upload --repository testpypi dist/*
-
-# Upload to PyPI (production)
-python -m twine upload dist/*
-```
-
-### Installing from Local Build
-
-```bash
-# Install from wheel
-pip install dist/dip-0.1.0-py3-none-any.whl
-
-# Or install from source distribution
-pip install dist/dip-0.1.0.tar.gz
 ```
 
 ## 📄 License
