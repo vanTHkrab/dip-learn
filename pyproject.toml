@@ -34,6 +34,10 @@ dependencies = [
 scikit = [
     "scikit-image>=0.26.0",
 ]
+web = [
+    "streamlit>=1.28.0",
+    "matplotlib>=3.7.0",
+]
 dev = [
     "pytest>=9.0.0",
     "pytest-cov>=6.0.0",
@@ -43,7 +47,7 @@ dev = [
     "flake8>=6.0.0",
 ]
 all = [
-    "dip-learn[scikit,dev]",
+    "dip-learn[scikit,web,dev]",
 ]
 
 [project.urls]
@@ -54,6 +58,8 @@ Issues = "https://github.com/vanTHkrab/dip-learn/issues"
 
 [project.scripts]
 dip-learn = "dip.cli.main:main"
+dipstream = "dip.web.cli:main"
+dip-web = "dip.web.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["."]
