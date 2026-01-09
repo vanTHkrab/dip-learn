@@ -2,7 +2,7 @@
 Version information for dip-learn package.
 """
 
-__version__ = '0.0.1b1'
+__version__ = '0.0.1b2'
 __author__ = 'BP-Monitor Team'
 __description__ = 'A comprehensive digital image processing library for Python'
 __license__ = 'MIT'
