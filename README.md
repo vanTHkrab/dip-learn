@@ -64,6 +64,14 @@ pip install -e ".[dev]"
 ```bash
 pip install matplotlib    # Visualization and plotting
 pip install scikit-image  # Advanced thresholding, morphology, denoising
+pip install streamlit     # Web interface
+```
+
+**Install with optional dependencies:**
+```bash
+pip install "dip-learn[web]"   # Web interface (Streamlit)
+pip install "dip-learn[scikit]" # Scikit-image features
+pip install "dip-learn[all]"    # All optional dependencies
 ```
 
 ## 🚀 Quick Start
@@ -875,6 +883,93 @@ if SKIMAGE_AVAILABLE:
 else:
     from dip import adaptive_threshold_gaussian
     # Fallback to OpenCV
+```
+
+## 🌐 Web Interface
+
+DIP-Learn includes a built-in web interface powered by Streamlit for easy image processing and visualization.
+
+### Installation
+
+```bash
+# Install with web dependencies
+pip install "dip-learn[web]"
+
+# Or install streamlit separately
+pip install streamlit matplotlib
+```
+
+### Launch Web Interface
+
+**From command line:**
+```bash
+# Using dipstream command
+dipstream
+
+# Or using dip-web
+dip-web
+
+# With custom port
+dipstream --port 8080
+
+# Make publicly accessible
+dipstream --public
+```
+
+**From Python:**
+```python
+from dip.web import launch_app
+
+# Launch with default settings
+launch_app()
+
+# Launch with custom settings
+launch_app(port=8080, host="0.0.0.0")
+```
+
+### Features
+
+The web interface provides:
+
+- **🔄 Quick Process**: Apply single filters with adjustable parameters
+  - Enhancement (Brightness, Contrast, Sharpen, Denoise)
+  - Filters (Gaussian Blur, Median Blur, Bilateral, Edge Detection)
+  - Transforms (Grayscale, HSV, Histogram Equalization, CLAHE)
+  - Threshold (Binary, Otsu, Adaptive)
+  - Morphology (Erosion, Dilation, Opening, Closing)
+
+- **🔧 Pipeline Builder**: Chain multiple operations
+  - Add/remove/reorder operations
+  - Enable/disable individual steps
+  - View intermediate results
+
+- **📊 Compare**: Side-by-side image comparison
+  - Side by Side view
+  - Overlay blending
+  - Slider comparison
+  - Difference heatmap
+
+- **📐 Metrics**: Image quality metrics
+  - MSE (Mean Squared Error)
+  - PSNR (Peak Signal-to-Noise Ratio)
+  - SSIM (Structural Similarity)
+  - MAE (Mean Absolute Error)
+
+### Components (for custom apps)
+
+```python
+from dip.web.components import (
+    image_uploader,          # File upload with preview
+    image_comparison,        # Compare two images
+    before_after_viewer,     # Before/after with multiple modes
+    histogram_viewer,        # Display histograms
+    metrics_display,         # Show quality metrics
+    pipeline_builder,        # Interactive pipeline builder
+    filter_selector,         # Filter selection UI
+    parameter_slider,        # Parameter controls
+    download_button,         # Image download
+    gallery_view,            # Grid image gallery
+)
 ```
 
 ## 🧪 Testing

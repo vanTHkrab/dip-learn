@@ -395,6 +395,17 @@ from .utils.metrics import (
 )
 
 # =============================================================================
+# Web Interface (Optional - requires streamlit)
+# =============================================================================
+try:
+    from .web import launch_app, run_server
+    WEB_AVAILABLE = True
+except ImportError:
+    WEB_AVAILABLE = False
+    launch_app = None
+    run_server = None
+
+# =============================================================================
 # All Public Symbols
 # =============================================================================
 __all__ = [
@@ -780,3 +791,11 @@ __all__.extend([
     'process_seven_segment',
     'batch_process',
 ])
+
+# Add web interface to __all__ if available
+if WEB_AVAILABLE:
+    __all__.extend([
+        'launch_app',
+        'run_server',
+        'WEB_AVAILABLE',
+    ])
